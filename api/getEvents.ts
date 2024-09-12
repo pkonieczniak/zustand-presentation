@@ -1,7 +1,9 @@
-import { SportEvent, SportId } from '../types';
+import { SportEventData, SportId } from '../types';
 
-const volleyballEvents: SportEvent[] = [
+const volleyballEvents: SportEventData[] = [
   {
+    id: 1,
+    sportId: SportId.Volleyball,
     teamLeft: 'Aluron CMC Warta Zawiercie',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/498371/inline/scalecrop=100x100/e74885/aluron_cmc_logo_2020.png',
@@ -12,6 +14,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '13.09.2024, 20:30',
   },
   {
+    id: 2,
+    sportId: SportId.Volleyball,
     teamLeft: 'PGE Projekt Warszawa',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/498383/inline/scalecrop=100x100/fe2eda/projekt_warszawa.png',
@@ -22,6 +26,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '14.09.2024, 14:45',
   },
   {
+    id: 3,
+    sportId: SportId.Volleyball,
     teamLeft: 'Cuprum Stilon Gorzów',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/624319/inline/scalecrop=100x100/39e6c1/rgb_logo_stilon_gorzow_cuprum_q.png',
@@ -32,6 +38,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '14.09.2024, 17:30',
   },
   {
+    id: 4,
+    sportId: SportId.Volleyball,
     teamLeft: 'Barkom Każany Lwów',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/498373/inline/scalecrop=100x100/eabd32/lwow.png',
@@ -42,6 +50,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '14.09.2024, 20:30',
   },
   {
+    id: 5,
+    sportId: SportId.Volleyball,
     teamLeft: 'Asseco Resovia Rzeszów',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/498372/inline/scalecrop=100x100/d4fdbe/2017_asseco.png',
@@ -52,6 +62,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '15.09.2024, 14:45',
   },
   {
+    id: 6,
+    sportId: SportId.Volleyball,
     teamLeft: 'Indykpol AZS Olsztyn',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/624318/inline/scalecrop=100x100/69acb9/azsolsztyn_gryf_2024.png',
@@ -62,6 +74,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '15.09.2024, 17:30',
   },
   {
+    id: 7,
+    sportId: SportId.Volleyball,
     teamLeft: 'GKS Katowice',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/576694/inline/scalecrop=100x100/8a9bd5/logo_gks.png',
@@ -72,6 +86,8 @@ const volleyballEvents: SportEvent[] = [
     gameDate: '15.09.2024, 20:30',
   },
   {
+    id: 8,
+    sportId: SportId.Volleyball,
     teamLeft: 'Steam Hemarpol Norwid Częstochowa',
     teamLeftLogo:
       'https://www.plusliga.pl/dl/624576/inline/scalecrop=100x100/3c5c8b/logo_norwid_herb.png',
@@ -83,8 +99,10 @@ const volleyballEvents: SportEvent[] = [
   },
 ];
 
-const soccerEvents: SportEvent[] = [
+const soccerEvents: SportEventData[] = [
   {
+    id: 9,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ Sport 5',
     teamLeft: 'Motor Lublin',
     teamRight: 'Górnik Zabrze',
@@ -95,6 +113,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '13.09.2024, 18:00',
   },
   {
+    id: 10,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ 4k UltraHD',
     teamLeft: 'GKS Katowice',
     teamRight: 'Widzew Łódź',
@@ -105,6 +125,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '13.09.2024, 20:30',
   },
   {
+    id: 11,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online',
     teamLeft: 'Lechia Gdańsk',
     teamRight: 'Radomiak Radom',
@@ -115,6 +137,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '14.09.2024, 14:45',
   },
   {
+    id: 12,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ Sport 5',
     teamLeft: 'Cracovia',
     teamRight: 'Pogoń Szczecin',
@@ -125,6 +149,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '14.09.2024, 17:30',
   },
   {
+    id: 13,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ 4k UltraHD',
     teamLeft: 'Lech Poznań',
     teamRight: 'Jagiellonia Białystok',
@@ -135,6 +161,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '14.09.2024, 20:15',
   },
   {
+    id: 14,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ Sport 5',
     teamLeft: 'Piast Gliwice',
     teamRight: 'Puszcza Niepołomice',
@@ -145,6 +173,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '15.09.2024, 12:15',
   },
   {
+    id: 15,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online',
     teamLeft: 'Korona Kielce',
     teamRight: 'KGHM Zagłębie Lubin',
@@ -155,6 +185,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '15.09.2024, 14:45',
   },
   {
+    id: 16,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online Canal+ 4k UltraHD Canal+ Premium TVP Sport Canal+ Sport 3 Canal+ Online Canal+ 4k UltraHD Canal+ Premium TVP Sport',
     teamLeft: 'Legia Warszawa',
     teamRight: 'Raków Częstochowa',
@@ -165,6 +197,8 @@ const soccerEvents: SportEvent[] = [
     gameDate: '15.09.2024, 17:30',
   },
   {
+    id: 17,
+    sportId: SportId.Soccer,
     tv: ' Canal+ Sport 3 Canal+ Online',
     teamLeft: 'Śląsk Wrocław',
     teamRight: 'Stal Mielec',

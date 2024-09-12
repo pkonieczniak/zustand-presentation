@@ -3,7 +3,9 @@ export enum SportId {
   Volleyball,
 }
 
-export interface SportEvent {
+export interface SportEventData {
+  id: number;
+  sportId: SportId;
   teamLeft: string;
   teamLeftLogo: string;
   teamRightLogo: string;

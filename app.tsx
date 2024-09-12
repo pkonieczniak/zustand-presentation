@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+
 import { Presentation } from './slides';
 import { MantineProvider } from '@mantine/core';
 

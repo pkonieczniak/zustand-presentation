@@ -1,32 +1,41 @@
-import { Flex } from '@mantine/core';
+import { Flex, Grid, GridCol, Paper } from '@mantine/core';
 import { Slide } from 'spectacle';
 import { SportEvents } from '../components/SportEvents';
 import { SportId } from '../types';
 
 export function Slide4() {
   return (
-    <Slide id="slide-4" padding={'0'}>
-      <Flex
-        id="slide-content-4"
-        columnGap="xl"
+    <Slide>
+      <Grid
+        id="dupa czarna"
         style={{
-          height: '100%',
-          alignSelf: 'center',
-          overflow: 'auto',
+          paddingLeft: '20px',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <div
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <SportEvents sportId={SportId.Soccer} />
-          {/* <SportEvents sportId={SportId.Volleyball} /> */}
-        </div>
-      </Flex>
+        <GridCol span={12}>
+          <SportEvents sportId={SportId.Volleyball} />
+        </GridCol>
+      </Grid>
     </Slide>
   );
+}
+
+{
+  /* <GridCol span={3} style={{ paddingTop: '24px', color: 'black' }}>
+            <Paper>
+              <Flex direction={'column'}>
+                <span>Ulubione mecze</span>
+                <span>13.09.2024, 18:00 Motor Lublin - Górnik Zabrze</span>
+                <span>13.09.2024, 18:00 Motor Lublin - Górnik Zabrze</span>
+                <span>13.09.2024, 18:00 Motor Lublin - Górnik Zabrze</span>
+              </Flex>
+            </Paper>
+          </GridCol> */
+}
+{
+  /* <SportEvents sportId={SportId.Volleyball} /> */
 }
 
 // function PseudoCode() {
