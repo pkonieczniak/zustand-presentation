@@ -1,121 +1,126 @@
-import { Button, Checkbox, Flex, Notification, TextInput } from '@mantine/core';
-import { useForm, hasLength, isNotEmpty } from '@mantine/form';
-import { useState } from 'react';
-import { Slide, CodePane } from 'spectacle';
+import { Flex } from '@mantine/core';
+import { Slide } from 'spectacle';
+import { SportEvents } from '../components/SportEvents';
+import { SportId } from '../types';
 
 export function Slide4() {
   return (
-    <Slide>
-      {/* <Notification
-        title="Dziękujęmy za rejestracje"
+    <Slide id="slide-4" padding={'0'}>
+      <Flex
+        id="slide-content-4"
+        columnGap="xl"
         style={{
-          position: 'absolute',
-          right: 0,
-          zIndex: 100,
-          width: '300px',
+          height: '100%',
+          alignSelf: 'center',
+          overflow: 'auto',
         }}
-      /> */}
-      <Flex columnGap="xl" style={{ height: '100%' }}>
-        <div style={{ maxHeight: '100%', overflow: 'auto' }}>
-          <CodePane
-            language="tsx"
-            highlightRanges={[
-              [2, 4],
-              [3, 5],
-              [8, 10],
-            ]}
-          >
-            {PseudoCode()}
-          </CodePane>
+      >
+        <div
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <SportEvents sportId={SportId.Soccer} />
+          {/* <SportEvents sportId={SportId.Volleyball} /> */}
         </div>
-        <RegistrationForm2 />
       </Flex>
     </Slide>
   );
 }
 
-function PseudoCode() {
-  return `
-    function RegistrationForm() {
-      const [username, setUsername] = useState('');
-      const [password, setPassword] = useState('');
-      const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
+// function PseudoCode() {
+//   return `
+//    function SportEvents () {
+//     const [events, setEvents] = useState([]);
+//     const [isLoading, setIsLoading] = useState()
 
-      return (
-        <Form onSubmit={() => {}}>
-          <Input
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-          />
-          <Input
-            value={password}
-            type="password"
-            onChange={event => setPassword(event.target.value)}
-          />
-          <Checkbox
-            checked={hasAcceptedTerms}
-            onChange={() => setHasAcceptedTerms(prev => !prev)}
-            label="Default checkbox"
-          />
-        </Form>
-      );
-    }
-  `;
-}
+//     useEffect(() => {
+//       async function fetchUsers = () => {
+//       }
+//      }, [])
+//    }
 
-function RegistrationForm2() {
-  const [isLoading, setIsLoading] = useState(false);
-  const form = useForm({
-    mode: 'uncontrolled',
-    initialValues: {
-      username: '',
-      password: '',
-      hasAcceptedTerms: false,
-    },
-    validate: {
-      username: hasLength({ min: 2 }),
-      hasAcceptedTerms: isNotEmpty(),
-      password: isNotEmpty(),
-    },
-  });
+//    function RegistrationForm() {
+//       const [username, setUsername] = useState('');
+//       const [password, setPassword] = useState('');
+//       const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
-  return (
-    <form
-      onSubmit={form.onSubmit(values => {
-        setIsLoading(true);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
-      })}
-      style={{
-        rowGap: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-        flex: 1,
-      }}
-    >
-      <TextInput
-        label="username"
-        key={form.key('username')}
-        {...form.getInputProps('username')}
-      />
-      <TextInput
-        label="password"
-        type="password"
-        key={form.key('password')}
-        {...form.getInputProps('password')}
-      />
-      <Checkbox
-        label="Accept terms"
-        key={form.key('hasAcceptedTerms')}
-        {...form.getInputProps('hasAcceptedTerms', { type: 'checkbox' })}
-      />
-      <Button type="submit" disabled={!form.isValid()} loading={isLoading}>
-        Submit
-      </Button>
-    </form>
-  );
-}
+//       return (
+//         <Form onSubmit={() => {}}>
+//           <Input
+//             value={username}
+//             onChange={event => setUsername(event.target.value)}
+//           />
+//           <Input
+//             value={password}
+//             type="password"
+//             onChange={event => setPassword(event.target.value)}
+//           />
+//           <Checkbox
+//             checked={hasAcceptedTerms}
+//             onChange={() => setHasAcceptedTerms(prev => !prev)}
+//             label="Default checkbox"
+//           />
+//         </Form>
+//       );
+//     }
+//   `;
+// }
+
+// function RegistrationForm() {
+//   const [isLoading, setIsLoading] = useState(false);
+//   const form = useForm({
+//     mode: 'uncontrolled',
+//     initialValues: {
+//       username: '',
+//       password: '',
+//       hasAcceptedTerms: false,
+//     },
+//     validate: {
+//       username: hasLength({ min: 2 }),
+//       hasAcceptedTerms: isNotEmpty(),
+//       password: isNotEmpty(),
+//     },
+//   });
+
+//   return (
+//     <form
+//       onSubmit={form.onSubmit((values) => {
+//         setIsLoading(true);
+//         setTimeout(() => {
+//           setIsLoading(false);
+//         }, 3000);
+//       })}
+//       style={{
+//         rowGap: '16px',
+//         display: 'flex',
+//         flexDirection: 'column',
+//         flex: 1,
+//       }}
+//     >
+//       <TextInput
+//         label="username"
+//         key={form.key('username')}
+//         {...form.getInputProps('username')}
+//       />
+//       <TextInput
+//         label="password"
+//         type="password"
+//         key={form.key('password')}
+//         {...form.getInputProps('password')}
+//       />
+//       <Checkbox
+//         label="Accept terms"
+//         key={form.key('hasAcceptedTerms')}
+//         {...form.getInputProps('hasAcceptedTerms', { type: 'checkbox' })}
+//       />
+//       <Button type="submit" disabled={!form.isValid()} loading={isLoading}>
+//         Submit
+//       </Button>
+//     </form>
+//   );
+// }
 
 /*
  Cześć! W dzisiejszej prezentacji opowiem o Zustand, czyli bibliotece która jest odpowiedzialna za zarządzanie stanem w aplikacjach frontendowych.
@@ -146,4 +151,35 @@ function RegistrationForm2() {
   /* <Appear>
         Bar
       </Appear> */
+}
+
+{
+  /* <Notification
+        title="Dziękujęmy za rejestracje"
+        style={{
+          position: 'absolute',
+          right: 0,
+          zIndex: 100,
+          width: '300px',
+        }}
+      /> */
+}
+
+{
+  /* <div style={{ maxHeight: '100%', overflow: 'auto' }}> */
+}
+{
+  /* <CodePane
+            language="tsx"
+            highlightRanges={[
+              [2, 4],
+              [3, 5],
+              [8, 10],
+            ]}
+          >
+            {PseudoCode()}
+          </CodePane> */
+}
+{
+  /* </div> */
 }
