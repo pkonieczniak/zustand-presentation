@@ -1,0 +1,29 @@
+{
+  "name": "zustand-presentation",
+  "private": true,
+  "scripts": {
+    "start": "vite dev --port 3030",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.12.2",
+    "@mantine/hooks": "^7.12.2",
+    "@mantine/notifications": "^7.12.2",
+    "@mantine/form": "^7.12.2",
+    "postcss": "^8.4.45",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "spectacle": "^10.1.7",
+    "react-element-to-jsx-string": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.1",
+    "prettier": "3.3.3",
+    "typescript": "^5.3.3",
+    "vite": "^3.0.7"
+  }
+}
