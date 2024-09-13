@@ -22,6 +22,15 @@
   scrollbar-color: #888 #f0f0f0; /* Thumb and track colors */
 }
 
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 pre {
   font-size: 14px !important;
 }
@@ -31,10 +40,63 @@ pre {
 }
 
 /* Override deck styles */
+
+.deck {
+  position: relative !important;
+  width: 100%;
+  height: 100%;
+}
+
+.full-width-slide > div {
+  width: 100%;
+}
+
 .deck > div {
   transform: none;
   transform-origin: 0%;
   height: 100%;
+  width: 100%;
   overflow: scroll;
   position: initial;
+}
+
+strong {
+  color: rgb(253, 253, 253);
+  text-shadow:
+    rgb(0, 23, 22) 0px 0px 2px,
+    rgba(3, 237, 249, 0.46) 0px 0px 3px,
+    rgba(3, 237, 249, 0.46) 0px 0px 5px,
+    rgba(3, 237, 249, 0.46) 0px 0px 8px;
+}
+
+.banner {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 10px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.banner-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+  font-size: 18px;
+  color: #333;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

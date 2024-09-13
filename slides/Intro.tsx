@@ -1,6 +1,6 @@
 import { SlideLayout } from 'spectacle';
 
-export function Slide1() {
+export function Intro() {
   return (
     <SlideLayout.FullBleedImage
       objectFit="contain"

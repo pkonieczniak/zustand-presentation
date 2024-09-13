@@ -13,3 +13,8 @@ export interface SportEventData {
   tv: string;
   gameDate: string;
 }
+
+export interface SportNews {
+  sportId: SportId;
+  text: string;
+}
