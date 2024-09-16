@@ -1,6 +1,15 @@
-import { Flex, Paper, Image, Button, Skeleton } from '@mantine/core';
+import {
+  Flex,
+  Paper,
+  Image,
+  Button,
+  Skeleton,
+  Text,
+  isNumberLike,
+} from '@mantine/core';
 import { FixtureData } from '../types';
 import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
+import { IconScreenShareOff } from '@tabler/icons-react';
 
 export function VolleyballFixtures() {
   const fixturesLoading = useVolleyballFixtures(
@@ -46,19 +55,25 @@ function VolleyballGame(event: FixtureData) {
     >
       <span
         style={{
-          width: '12%',
+          width: '13%',
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
         }}
       >
-        {event.tv}
+        {event.tv ?? <IconScreenShareOff />}
       </span>
-      <span style={{ width: '10%' }}>{event.gameDate}</span>
+      <span style={{ width: '15%' }}>{event.gameDate}</span>
       <Flex gap={'xl'} align={'center'} flex={1}>
         <Image src={event.teamLeftLogo} width={'25px'} height={'25px'} />
-        {event.teamLeft} {event.teamLeftResult} - {event.teamRightResult}{' '}
-        {event.teamRight}
+        <Flex align={'center'} gap={'sm'}>
+          <span>{event.teamLeft}</span>
+          <ResultBox
+            teamLeftResult={event.teamLeftResult}
+            teamRightResult={event.teamRightResult}
+          />
+          {event.teamRight}
+        </Flex>
         <Image src={event.teamRightLogo} width={'25px'} height={'25px'} />
       </Flex>
       <Button
@@ -74,6 +89,59 @@ function VolleyballGame(event: FixtureData) {
           {isObserved ? 'Usuń z obserwowanych' : 'Dodaj do obserwowanych'}
         </span>
       </Button>
+    </Flex>
+  );
+}
+
+function ResultBox({
+  teamLeftResult,
+  teamRightResult,
+}: {
+  teamLeftResult: string;
+  teamRightResult: string;
+}) {
+  const isResultValid =
+    isNumberLike(teamLeftResult) && isNumberLike(teamRightResult);
+
+  return (
+    <Flex gap={'sm'}>
+      <Text
+        ta={'center'}
+        size="xl"
+        fw={'bold'}
+        w={'2rem'}
+        h={'2rem'}
+        style={{ borderRadius: '10%' }}
+        bg={
+          !isResultValid
+            ? 'gray'
+            : teamLeftResult > teamRightResult
+              ? 'green'
+              : 'red'
+        }
+      >
+        {teamLeftResult}
+      </Text>
+      <Text size="xl" fw={'bold'}>
+        -
+      </Text>
+      <Text
+        ta={'center'}
+        size="xl"
+        fw={'bold'}
+        w={'2rem'}
+        h={'2rem'}
+        style={{ borderRadius: '10%' }}
+        bg={
+          !isResultValid
+            ? 'gray'
+            : teamRightResult > teamLeftResult
+              ? 'green'
+              : 'red'
+        }
+      >
+        {teamRightResult}
+      </Text>
     </Flex>
   );
 }

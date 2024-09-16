@@ -1,4 +1,6 @@
-export const tauronligaData = [
+import { FixtureData } from '../types';
+
+export const tauronligaData: Array<FixtureData[]> = [
   [
     {
       id: '1103473',

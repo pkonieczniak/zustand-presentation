@@ -7,6 +7,7 @@ export function VolleyballFixturesSearch() {
   const selectedGameWeek = useVolleyballFixtures(
     (state) => state.selectedGameWeek,
   );
+  const totalGameWeeks = useVolleyballFixtures((state) => state.totalGameWeeks);
   const changeLeague = useVolleyballFixtures((state) => state.changeLeague);
   const changeGameWeek = useVolleyballFixtures((state) => state.changeGameWeek);
 
@@ -37,11 +38,10 @@ export function VolleyballFixturesSearch() {
             }
           }}
           value={selectedGameWeek.toString()}
-          data={[
-            { label: 'Kolejka 1', value: '0' },
-            { label: 'Kolejka 2', value: '1' },
-            { label: 'Kolejka 3', value: '2' },
-          ]}
+          data={Array.from({ length: totalGameWeeks }).map((_, index) => ({
+            label: `Kolejka ${index + 1}`,
+            value: index.toString(),
+          }))}
         />
       </GridCol>
     </Grid>
