@@ -1,20 +1,22 @@
 import { Flex, Paper, Text, Title } from '@mantine/core';
-import { SportsEventsIcon } from './SportsEventsIcon';
-import { useSportsStore } from '../stores/sports-events.store';
+import { VolleyballFixturesIcon } from './VolleyballFixturesIcon';
+import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
 
-export function SportsEventsFollowed() {
-  const observedEvents = useSportsStore((state) => state.observedEvents);
+export function VolleyballFixturesFollowed() {
+  const observedFixtures = useVolleyballFixtures(
+    (state) => state.observedFixtures,
+  );
 
   return (
     <Paper p="xl" radius="md">
       <Text c={'blue'}>Obserwowane</Text>
-      {!observedEvents.length ? (
+      {!observedFixtures.length ? (
         <Title order={4}>Brak obserwowanych wydarzeń</Title>
       ) : (
-        observedEvents.map(({ id, gameDate, teamLeft, teamRight, sportId }) => (
+        observedFixtures.map(({ id, gameDate, teamLeft, teamRight }) => (
           <Flex key={id} direction={'column'} className="border" mt={'sm'}>
             <Text size="xs" c={'black'}>
-              <SportsEventsIcon sportId={sportId} />
+              <VolleyballFixturesIcon />
               {gameDate}
             </Text>
             <Text size="xs" c={'black'}>
