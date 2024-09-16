@@ -1,15 +1,15 @@
 import { Select, Grid, GridCol } from '@mantine/core';
 import { LeagueId } from '../types';
-import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
+import { useVolleyballFixtures } from '../contexts/VolleyballFixturesProvider';
 
 export function VolleyballFixturesSearch() {
-  const selectedLeague = useVolleyballFixtures((state) => state.selectedLeague);
-  const selectedGameWeek = useVolleyballFixtures(
-    (state) => state.selectedGameWeek,
-  );
-  const totalGameWeeks = useVolleyballFixtures((state) => state.totalGameWeeks);
-  const changeLeague = useVolleyballFixtures((state) => state.changeLeague);
-  const changeGameWeek = useVolleyballFixtures((state) => state.changeGameWeek);
+  const {
+    selectedLeague,
+    selectedGameWeek,
+    totalGameWeeks,
+    changeGameWeek,
+    changeLeague,
+  } = useVolleyballFixtures();
 
   return (
     <Grid>

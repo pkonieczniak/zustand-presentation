@@ -8,15 +8,11 @@ import {
   isNumberLike,
 } from '@mantine/core';
 import { FixtureData } from '../types';
-import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
 import { IconScreenShareOff } from '@tabler/icons-react';
+import { useVolleyballFixtures } from '../contexts/VolleyballFixturesProvider';
 
 export function VolleyballFixtures() {
-  const fixturesLoading = useVolleyballFixtures(
-    (state) => state.fixturesLoading,
-  );
-  const fixtures = useVolleyballFixtures((state) => state.fixtures);
-
+  const { fixturesLoading, fixtures } = useVolleyballFixtures();
   return (
     <Skeleton visible={fixturesLoading} style={{ marginTop: '10px' }}>
       {fixtures.map((event) => (
@@ -27,15 +23,8 @@ export function VolleyballFixtures() {
 }
 
 function VolleyballGame(event: FixtureData) {
-  const observedFixtures = useVolleyballFixtures(
-    (state) => state.observedFixtures,
-  );
-  const addObservedFixture = useVolleyballFixtures(
-    (state) => state.addObservedFixture,
-  );
-  const removeObservedFixture = useVolleyballFixtures(
-    (state) => state.removeObservedFixture,
-  );
+  const { observedFixtures, addObservedFixture, removeObservedFixture } =
+    useVolleyballFixtures();
 
   const isObserved = observedFixtures.find(({ id }) => id === event.id);
 
@@ -44,6 +33,7 @@ function VolleyballGame(event: FixtureData) {
       id={`${event.teamLeft}-${event.teamRight}`}
       component={Paper}
       align={'center'}
+      wrap={'wrap'}
       style={{
         marginTop: '16px',
         marginBottom: '16px',
@@ -64,7 +54,7 @@ function VolleyballGame(event: FixtureData) {
         {event.tv ?? <IconScreenShareOff />}
       </span>
       <span style={{ width: '15%' }}>{event.gameDate}</span>
-      <Flex gap={'xl'} align={'center'} flex={1}>
+      <Flex gap={'xl'} align={'center'} flex={3}>
         <Image src={event.teamLeftLogo} width={'25px'} height={'25px'} />
         <Flex align={'center'} gap={'sm'}>
           <span>{event.teamLeft}</span>
@@ -78,16 +68,15 @@ function VolleyballGame(event: FixtureData) {
       </Flex>
       <Button
         color={isObserved ? 'red' : 'blue'}
-        style={{ marginLeft: 'auto', width: '250px' }}
+        size="sm"
+        style={{ marginLeft: 'auto', width: 'fit-content' }}
         onClick={() => {
           return isObserved
             ? removeObservedFixture(event.id)
             : addObservedFixture(event);
         }}
       >
-        <span>
-          {isObserved ? 'Usuń z obserwowanych' : 'Dodaj do obserwowanych'}
-        </span>
+        {isObserved ? 'Nie obserwuj' : 'Obserwuj'}
       </Button>
     </Flex>
   );
