@@ -1,9 +1,10 @@
 import { Flex, Paper, Image, Button, Skeleton } from '@mantine/core';
-import { SportEventData } from './types';
-import { useSportsContext } from './SportsContext/SportsContextProvider';
+import { SportEventData } from '../types';
+import { useSportsStore } from '../stores/sports-events.store';
 
 export function SportsEvents() {
-  const { eventsLoading, events } = useSportsContext();
+  const eventsLoading = useSportsStore((state) => state.eventsLoading);
+  const events = useSportsStore((state) => state.events);
 
   return (
     <Skeleton visible={eventsLoading} style={{ marginTop: '10px' }}>
@@ -15,8 +16,12 @@ export function SportsEvents() {
 }
 
 function SportEvent(event: SportEventData) {
-  const { addObservedEvent, removeObservedEvent, observedEvents } =
-    useSportsContext();
+  const observedEvents = useSportsStore((state) => state.observedEvents);
+  const addObservedEvent = useSportsStore((state) => state.addObservedEvent);
+  const removeObservedEvent = useSportsStore(
+    (state) => state.removeObservedEvent,
+  );
+
   const isObserved = observedEvents.find(({ id }) => id === event.id);
 
   return (
@@ -53,10 +58,9 @@ function SportEvent(event: SportEventData) {
         color={isObserved ? 'red' : 'blue'}
         style={{ marginLeft: 'auto', width: '250px' }}
         onClick={() => {
-          if (isObserved) {
-            return removeObservedEvent(event.id);
-          }
-          addObservedEvent(event);
+          return isObserved
+            ? removeObservedEvent(event.id)
+            : addObservedEvent(event);
         }}
       >
         <span>

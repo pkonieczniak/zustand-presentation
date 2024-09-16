@@ -1,9 +1,10 @@
 import { Select } from '@mantine/core';
-import { SportId } from './types';
-import { useSportsContext } from './SportsContext/SportsContextProvider';
+import { SportId } from '../types';
+import { useSportsStore } from '../stores/sports-events.store';
 
-export function Filters() {
-  const { changeSport, selectedSportId } = useSportsContext();
+export function SportsEventsSearch() {
+  const selectedSportId = useSportsStore((state) => state.selectedSportId);
+  const changeSport = useSportsStore((state) => state.changeSport);
 
   return (
     <Select

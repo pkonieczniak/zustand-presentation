@@ -1,4 +1,4 @@
-import { SportId, SportNews } from '../components/sports-event/types';
+import { SportId, SportNews } from '../types';
 
 const volleyballNews: SportNews[] = [
   {

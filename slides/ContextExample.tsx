@@ -1,5 +1,5 @@
 import { Slide } from 'spectacle';
-import SportsEventsPage from '../components/sports-event/page';
+import SportsEventsPage from '../sports-events/components/page';
 
 export function ContextExample() {
   return (

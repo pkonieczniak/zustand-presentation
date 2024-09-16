@@ -1,19 +1,19 @@
 import { Anchor, Paper } from '@mantine/core';
-import { SportIcon } from './SportIcon';
-import { useSportsContext } from './SportsContext/SportsContextProvider';
+import { SportsEventsIcon } from './SportsEventsIcon';
+import { useSportsStore } from '../stores/sports-events.store';
 
 export function AdvertCarousel() {
-  const { news } = useSportsContext();
+  const news = useSportsStore((state) => state.news);
 
   return (
     <Paper className="banner">
       <div className="banner-content">
         {news.map(({ text, sportId }) => {
           return (
-            <>
-              <SportIcon sportId={sportId} />
+            <div key={text}>
+              <SportsEventsIcon sportId={sportId} />
               <Anchor href="#">{text}</Anchor>
-            </>
+            </div>
           );
         })}
       </div>

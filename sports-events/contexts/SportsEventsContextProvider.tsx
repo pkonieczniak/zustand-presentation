@@ -7,11 +7,11 @@ import {
   useState,
 } from 'react';
 import { SportEventData, SportId, SportNews } from '../types';
-import { getEvents } from '../../../api/getEvents';
-import dayjs from '../../../tools/dayjs';
-import { getSportNews } from '../../../api/getSportNews';
+import { getSportEvents } from '../api/getSportEvents';
+import { getSportNews } from '../api/getSportNews';
+import dayjs from '../../tools/dayjs';
 
-export const SportsContext = createContext<{
+export const SportsEventsContext = createContext<{
   events: SportEventData[];
   eventsLoading: boolean;
   news: SportNews[];
@@ -23,7 +23,7 @@ export const SportsContext = createContext<{
   removeObservedEvent: (id: SportEventData['id']) => void;
 } | null>(null);
 
-export const SportsContextProvider = ({
+export const SportsEventsContextProvider = ({
   children,
 }: {
   children: ReactNode;
@@ -40,7 +40,7 @@ export const SportsContextProvider = ({
   useEffect(() => {
     const fetchEvents = async () => {
       setEventsLoading(true);
-      const events = await getEvents(selectedSportId);
+      const events = await getSportEvents(selectedSportId);
       setEvents(events);
       setEventsLoading(false);
     };
@@ -56,8 +56,8 @@ export const SportsContextProvider = ({
     fetchNews();
   }, [selectedSportId]);
 
-  const changeSport = useCallback((eventId: number) => {
-    setSelectedSportId(eventId);
+  const changeSport = useCallback((sportId: number) => {
+    setSelectedSportId(sportId);
   }, []);
 
   const addObservedEvent = useCallback((event: SportEventData) => {
@@ -78,7 +78,7 @@ export const SportsContextProvider = ({
   }, []);
 
   return (
-    <SportsContext.Provider
+    <SportsEventsContext.Provider
       value={{
         events,
         eventsLoading,
@@ -92,14 +92,14 @@ export const SportsContextProvider = ({
       }}
     >
       {children}
-    </SportsContext.Provider>
+    </SportsEventsContext.Provider>
   );
 };
 
-export function useSportsContext() {
-  const context = useContext(SportsContext);
+export function useSportsEventsContext() {
+  const context = useContext(SportsEventsContext);
   if (!context) {
-    throw new Error('Cannot use SportsContext - missing SportsProvider');
+    throw new Error('Cannot use SportsEventsContext - missing SportsProvider');
   }
   return context;
 }

@@ -1,9 +1,9 @@
 import { Flex, Paper, Text, Title } from '@mantine/core';
-import { useSportsContext } from './SportsContext/SportsContextProvider';
-import { SportIcon } from './SportIcon';
+import { SportsEventsIcon } from './SportsEventsIcon';
+import { useSportsStore } from '../stores/sports-events.store';
 
-export function ObservedEvents() {
-  const { observedEvents } = useSportsContext();
+export function SportsEventsFollowed() {
+  const observedEvents = useSportsStore((state) => state.observedEvents);
 
   return (
     <Paper p="xl" radius="md">
@@ -14,7 +14,7 @@ export function ObservedEvents() {
         observedEvents.map(({ id, gameDate, teamLeft, teamRight, sportId }) => (
           <Flex key={id} direction={'column'} className="border" mt={'sm'}>
             <Text size="xs" c={'black'}>
-              <SportIcon sportId={sportId} />
+              <SportsEventsIcon sportId={sportId} />
               {gameDate}
             </Text>
             <Text size="xs" c={'black'}>

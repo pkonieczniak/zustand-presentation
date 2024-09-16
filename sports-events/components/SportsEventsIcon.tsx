@@ -1,7 +1,7 @@
 import { IconBallFootball, IconBallVolleyball } from '@tabler/icons-react';
-import { SportId } from './types';
+import { SportId } from '../types';
 
-export function SportIcon({ sportId }: { sportId: SportId }) {
+export function SportsEventsIcon({ sportId }: { sportId: SportId }) {
   if (sportId === SportId.Volleyball) {
     return <IconBallVolleyball size="1rem" color="blue" fill="white" />;
   }

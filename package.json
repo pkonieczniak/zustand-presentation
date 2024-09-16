@@ -19,7 +19,8 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-syntax-highlighter": "^15.5.0",
-    "spectacle": "^10.1.7"
+    "spectacle": "^10.1.7",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

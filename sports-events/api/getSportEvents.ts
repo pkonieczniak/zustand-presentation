@@ -1,4 +1,4 @@
-import { SportEventData, SportId } from '../components/sports-event/types';
+import { SportEventData, SportId } from '../types';
 
 const volleyballEvents: SportEventData[] = [
   {
@@ -210,7 +210,7 @@ const soccerEvents: SportEventData[] = [
   },
 ];
 
-export async function getEvents(sportId: SportId) {
+export async function getSportEvents(sportId: SportId) {
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
