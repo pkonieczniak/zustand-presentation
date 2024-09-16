@@ -1,4 +1,6 @@
-export const plusLigaData = [
+import { FixtureData } from '../types';
+
+export const plusLigaData: Array<FixtureData[]> = [
   [
     {
       id: '1103460',

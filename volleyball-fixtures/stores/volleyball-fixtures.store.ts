@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { subscribeWithSelector } from 'zustand/middleware';
 import { FixtureData, LeagueId, GameWeek } from '../types';
 import dayjs from 'dayjs';
 import { getFixtures } from '../api/getFixtures';
@@ -9,6 +8,7 @@ interface VolleyballFixturesState {
   selectedLeague: LeagueId;
   selectedGameWeek: GameWeek;
   fixtures: FixtureData[];
+  totalGameWeeks: number;
   fixturesLoading: boolean;
   observedFixtures: FixtureData[];
 }
@@ -24,20 +24,21 @@ interface VolleyballFixturesActions {
 type VolleyballFixturesStore = VolleyballFixturesState &
   VolleyballFixturesActions;
 
-export const useVolleyballFixtures = create(
-  subscribeWithSelector<VolleyballFixturesStore>((set, get) => ({
+export const useVolleyballFixtures = create<VolleyballFixturesStore>(
+  (set, get) => ({
     fixtures: [],
+    totalGameWeeks: 0,
     fixturesLoading: true,
     selectedLeague: LeagueId.PlusLiga,
     selectedGameWeek: 0,
     observedFixtures: [],
     fetchFixtures: async () => {
       set({ fixturesLoading: true });
-      const fixtures = await getFixtures(
+      const { fixtures, totalGameWeeks } = await getFixtures(
         get().selectedLeague,
         get().selectedGameWeek,
       );
-      set({ fixtures, fixturesLoading: false });
+      set({ fixtures, totalGameWeeks, fixturesLoading: false });
     },
     addObservedFixture: (event) => {
       return set({
@@ -52,7 +53,8 @@ export const useVolleyballFixtures = create(
         ),
       });
     },
-    changeLeague: (sportId) => set({ selectedLeague: sportId }),
+    changeLeague: (sportId) =>
+      set({ selectedLeague: sportId, selectedGameWeek: 0 }),
     changeGameWeek: (round) => set({ selectedGameWeek: round }),
     removeObservedFixture: (eventId) => {
       const { observedFixtures } = get();
@@ -62,7 +64,7 @@ export const useVolleyballFixtures = create(
         ),
       });
     },
-  })),
+  }),
 );
 
 export const useFetchVolleyballFixtures = () => {
@@ -75,18 +77,3 @@ export const useFetchVolleyballFixtures = () => {
     fetchFixtures();
   }, [selectedLeague, selectedGameWeek]);
 };
-
-// Transient updates (for often occurring state-changes)
-// export const useFetchVolleyballFixtures = () => {
-//   useEffect(
-//     () =>
-//       useVolleyballFixtures.subscribe(
-//         (state) => state.selectedLeague,
-//         () => {
-//           useVolleyballFixtures.getState().fetchFixtures();
-//         },
-//         { fireImmediately: true },
-//       ),
-//     [],
-//   );
-// };

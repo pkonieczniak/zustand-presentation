@@ -14,6 +14,7 @@ export const VolleyballFixtures = createContext<{
   selectedLeague: LeagueId;
   selectedGameWeek: GameWeek;
   fixtures: FixtureData[];
+  totalGameWeeks: number;
   fixturesLoading: boolean;
   observedFixtures: FixtureData[];
   changeLeague: (leagueId: LeagueId) => void;
@@ -32,15 +33,20 @@ export const VolleyballFixturesProvider = ({
   );
   const [selectedGameWeek, setSelectedGameWeek] = useState<GameWeek>(0);
   const [fixtures, setEvents] = useState<FixtureData[]>([]);
-  const [fixturesLoading, setEventsLoading] = useState(true);
+  const [totalGameWeeks, setTotalGameWeeks] = useState<number>(0);
+  const [fixturesLoading, setFixturesLoading] = useState(true);
   const [observedFixtures, setObservedEvents] = useState<FixtureData[]>([]);
 
   useEffect(() => {
     const fetchFixtures = async () => {
-      setEventsLoading(true);
-      const fixtures = await getFixtures(selectedLeague, selectedGameWeek);
+      setFixturesLoading(true);
+      const { fixtures, totalGameWeeks } = await getFixtures(
+        selectedLeague,
+        selectedGameWeek,
+      );
       setEvents(fixtures);
-      setEventsLoading(false);
+      setTotalGameWeeks(totalGameWeeks);
+      setFixturesLoading(false);
     };
 
     fetchFixtures();
@@ -79,6 +85,7 @@ export const VolleyballFixturesProvider = ({
         observedFixtures,
         selectedLeague,
         selectedGameWeek,
+        totalGameWeeks,
         changeLeague,
         changeGameWeek,
         addObservedFixture,
