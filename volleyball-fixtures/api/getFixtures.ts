@@ -2,29 +2,24 @@ import { FixtureData, LeagueId, GameWeek } from '../types';
 import { plusLigaData } from '../data/plusliga';
 import { firstLeagueData } from '../data/1liga';
 import { tauronligaData } from '../data/tauronliga';
+import { delay } from '../../tools/delay';
+
+const fixtures: Record<LeagueId, Array<FixtureData[]>> = {
+  [LeagueId.PlusLiga]: plusLigaData,
+  [LeagueId.Tauronliga]: tauronligaData,
+  [LeagueId.Tauron1Liga]: firstLeagueData,
+};
 
 export async function getFixtures(
   leagueId: LeagueId,
   gameWeek: GameWeek,
-): Promise<FixtureData[]> {
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-
+): Promise<{ fixtures: FixtureData[]; totalGameWeeks: number }> {
   await delay(500);
 
-  let fixture;
+  const leagueFixtures = fixtures[leagueId];
 
-  switch (leagueId) {
-    case LeagueId.PlusLiga:
-      fixture = plusLigaData;
-      break;
-    case LeagueId.Tauronliga:
-      fixture = tauronligaData;
-      break;
-    case LeagueId.Tauron1Liga:
-      fixture = firstLeagueData;
-      break;
-  }
-
-  return fixture[gameWeek] as FixtureData[];
+  return {
+    fixtures: leagueFixtures[gameWeek] as FixtureData[],
+    totalGameWeeks: leagueFixtures.length,
+  };
 }

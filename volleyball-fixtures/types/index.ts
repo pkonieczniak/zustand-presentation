@@ -8,7 +8,7 @@ export type GameWeek = number;
 
 export interface FixtureData {
   id: string;
-  tv: string;
+  tv?: string;
   gameDate: string;
   teamLeft: string;
   teamLeftLogo: string;

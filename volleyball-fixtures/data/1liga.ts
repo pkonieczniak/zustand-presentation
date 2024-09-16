@@ -1,4 +1,6 @@
-export const firstLeagueData = [
+import { FixtureData } from '../types';
+
+export const firstLeagueData: Array<FixtureData[]> = [
   [
     {
       id: '1103835',
