@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { FixtureData, LeagueId, GameWeek } from '../types';
 import dayjs from 'dayjs';
@@ -69,27 +70,15 @@ export const useVolleyballFixtures = create(
 );
 
 export const useFetchVolleyballFixtures = () => {
-  const selectedLeague = useVolleyballFixtures((state) => state.selectedLeague);
-  const selectedGameWeek = useVolleyballFixtures(
-    (state) => state.selectedGameWeek,
+  useEffect(
+    () =>
+      useVolleyballFixtures.subscribe(
+        (state) => [state.selectedLeague, state.selectedGameWeek],
+        () => {
+          useVolleyballFixtures.getState().fetchFixtures();
+        },
+        { fireImmediately: true, equalityFn: shallow },
+      ),
+    [],
   );
-  const fetchFixtures = useVolleyballFixtures((state) => state.fetchFixtures);
-  useEffect(() => {
-    fetchFixtures();
-  }, [selectedLeague, selectedGameWeek]);
 };
-
-// Transient updates (for often occurring state-changes)
-// export const useFetchVolleyballFixtures = () => {
-//   useEffect(
-//     () =>
-//       useVolleyballFixtures.subscribe(
-//         (state) => state.selectedLeague,
-//         () => {
-//           useVolleyballFixtures.getState().fetchFixtures();
-//         },
-//         { fireImmediately: true },
-//       ),
-//     [],
-//   );
-// };
