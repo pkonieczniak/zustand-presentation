@@ -10,7 +10,7 @@ import { LeagueId, GameWeek, FixtureData } from '../types';
 import { getFixtures } from '../api/getFixtures';
 import dayjs from '../../tools/dayjs';
 
-export const VolleyballFixtures = createContext<{
+export const VolleyballFixturesContext = createContext<{
   selectedLeague: LeagueId;
   selectedGameWeek: GameWeek;
   fixtures: FixtureData[];
@@ -50,7 +50,7 @@ export const VolleyballFixturesProvider = ({
     };
 
     fetchFixtures();
-  }, [selectedLeague]);
+  }, [selectedLeague, selectedGameWeek]);
 
   const changeLeague = useCallback((leagueId: LeagueId) => {
     setSelectedLeague(leagueId);
@@ -78,7 +78,7 @@ export const VolleyballFixturesProvider = ({
   }, []);
 
   return (
-    <VolleyballFixtures.Provider
+    <VolleyballFixturesContext.Provider
       value={{
         fixtures,
         fixturesLoading,
@@ -93,12 +93,12 @@ export const VolleyballFixturesProvider = ({
       }}
     >
       {children}
-    </VolleyballFixtures.Provider>
+    </VolleyballFixturesContext.Provider>
   );
 };
 
 export function useVolleyballFixtures() {
-  const context = useContext(VolleyballFixtures);
+  const context = useContext(VolleyballFixturesContext);
   if (!context) {
     throw new Error(
       'Cannot use VolleyballFixtures - missing VolleyballFixturesProvider',
