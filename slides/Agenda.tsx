@@ -5,6 +5,7 @@ export function Agenda() {
     <SlideLayout.List
       title="Agenda"
       items={[
+        'Stan aplikacji',
         'Dlaczego potrzebujemy kolejnej biblioteki?',
         'Obecne rozwiązania na rynku',
         'Zustand',
