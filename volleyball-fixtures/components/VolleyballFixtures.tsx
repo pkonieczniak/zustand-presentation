@@ -8,18 +8,18 @@ import {
   isNumberLike,
 } from '@mantine/core';
 import { FixtureData } from '../types';
-import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
+import { useVolleyballFixturesStore } from '../stores/volleyball-fixtures.store';
 import { IconScreenShareOff } from '@tabler/icons-react';
 
 export function VolleyballFixtures() {
-  const fixturesLoading = useVolleyballFixtures(
-    (state) => state.fixturesLoading,
+  const fixturesLoading = useVolleyballFixturesStore(
+    state => state.fixturesLoading,
   );
-  const fixtures = useVolleyballFixtures((state) => state.fixtures);
+  const fixtures = useVolleyballFixturesStore(state => state.fixtures);
 
   return (
     <Skeleton visible={fixturesLoading} style={{ marginTop: '10px' }}>
-      {fixtures.map((event) => (
+      {fixtures.map(event => (
         <VolleyballGame {...event} key={event.id} />
       ))}
     </Skeleton>
@@ -27,14 +27,14 @@ export function VolleyballFixtures() {
 }
 
 function VolleyballGame(event: FixtureData) {
-  const observedFixtures = useVolleyballFixtures(
-    (state) => state.observedFixtures,
+  const observedFixtures = useVolleyballFixturesStore(
+    state => state.observedFixtures,
   );
-  const addObservedFixture = useVolleyballFixtures(
-    (state) => state.addObservedFixture,
+  const addObservedFixture = useVolleyballFixturesStore(
+    state => state.addObservedFixture,
   );
-  const removeObservedFixture = useVolleyballFixtures(
-    (state) => state.removeObservedFixture,
+  const removeObservedFixture = useVolleyballFixturesStore(
+    state => state.removeObservedFixture,
   );
 
   const isObserved = observedFixtures.find(({ id }) => id === event.id);

@@ -1,22 +1,28 @@
 import { Select, Grid, GridCol } from '@mantine/core';
 import { LeagueId } from '../types';
-import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
+import { useVolleyballFixturesStore } from '../stores/volleyball-fixtures.store';
 
 export function VolleyballFixturesSearch() {
-  const selectedLeague = useVolleyballFixtures((state) => state.selectedLeague);
-  const selectedGameWeek = useVolleyballFixtures(
-    (state) => state.selectedGameWeek,
+  const selectedLeague = useVolleyballFixturesStore(
+    state => state.selectedLeague,
   );
-  const totalGameWeeks = useVolleyballFixtures((state) => state.totalGameWeeks);
-  const changeLeague = useVolleyballFixtures((state) => state.changeLeague);
-  const changeGameWeek = useVolleyballFixtures((state) => state.changeGameWeek);
+  const selectedGameWeek = useVolleyballFixturesStore(
+    state => state.selectedGameWeek,
+  );
+  const totalGameWeeks = useVolleyballFixturesStore(
+    state => state.totalGameWeeks,
+  );
+  const changeLeague = useVolleyballFixturesStore(state => state.changeLeague);
+  const changeGameWeek = useVolleyballFixturesStore(
+    state => state.changeGameWeek,
+  );
 
   return (
     <Grid>
       <GridCol span={3}>
         <Select
           label="Wybierz ligę"
-          onChange={(value) => {
+          onChange={value => {
             if (value) {
               changeLeague(Number(value));
             }
@@ -32,7 +38,7 @@ export function VolleyballFixturesSearch() {
       <GridCol span={2}>
         <Select
           label="Wybierz kolejkę"
-          onChange={(value) => {
+          onChange={value => {
             if (value) {
               changeGameWeek(Number(value));
             }

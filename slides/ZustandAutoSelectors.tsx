@@ -11,14 +11,11 @@ import {
 } from 'spectacle';
 import synthwave84 from 'react-syntax-highlighter/dist/esm/styles/prism/synthwave84';
 
-export function ZustandKeyConceptsActions() {
+export function ZustandAutoSelectors() {
   return (
     <Slide className="full-width-slide overflow-auto">
       <Flex h={'100%'} direction={'column'}>
-        <Heading>Zustand podstawy</Heading>
-        <Text>
-          <strong>Akcje to funkcje</strong>
-        </Text>
+        <Heading>Zustand autoselectors</Heading>
         <Appear>
           <div>
             <CodePane language="tsx" theme={synthwave84}>

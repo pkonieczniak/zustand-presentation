@@ -23,10 +23,10 @@ export function ZustandKeyConceptsStoreSelectors() {
           <div>
             <CodePane language="tsx" theme={synthwave84}>
               {`
-                import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store'
+                import { useVolleyballFixturesStore } from '../stores/volleyball-fixtures.store'
 
                 export function VolleyballFixturesFollowed() {
-                  const observedFixtures = useVolleyballFixtures((state) => state.observedFixtures);
+                  const observedFixtures = useVolleyballFixturesStore((state) => state.observedFixtures);
                   return (
                     <Title>Obserwujesz \${observedFixtures.length} spotkań</Title>
                   )
@@ -34,13 +34,13 @@ export function ZustandKeyConceptsStoreSelectors() {
 
                 export function VolleyballFixturesSearch() {
                   // Nasłuchiwanie na cały store
-                  // const store = useVolleyballFixtures() 
-                  // const { selectedLeague } = useVolleyballFixtures() 
-                  const selectedLeague = useVolleyballFixtures((state) => state.selectedLeague);
-                  const selectedGameWeek = useVolleyballFixtures((state) => state.selectedGameWeek);
-                  const totalGameWeeks = useVolleyballFixtures((state) => state.totalGameWeeks);
-                  const changeLeague = useVolleyballFixtures((state) => state.changeLeague);
-                  const changeGameWeek = useVolleyballFixtures((state) => state.changeGameWeek);
+                  // const store = useVolleyballFixturesStore() 
+                  // const { selectedLeague } = useVolleyballFixturesStore() 
+                  const selectedLeague = useVolleyballFixturesStore((state) => state.selectedLeague);
+                  const selectedGameWeek = useVolleyballFixturesStore((state) => state.selectedGameWeek);
+                  const totalGameWeeks = useVolleyballFixturesStore((state) => state.totalGameWeeks);
+                  const changeLeague = useVolleyballFixturesStore((state) => state.changeLeague);
+                  const changeGameWeek = useVolleyballFixturesStore((state) => state.changeGameWeek);
 
                   return (
                    //....

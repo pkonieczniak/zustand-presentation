@@ -35,7 +35,7 @@ export function ZustandKeyConceptsStore() {
 
                 type VolleyballFixturesStore = VolleyballFixturesState & VolleyballFixturesActions;              
               
-                export const useVolleyballFixtures = create<VolleyballFixturesStore>(
+                export const useVolleyballFixturesStore = create<VolleyballFixturesStore>(
                   (set, get) => ({
                     fixtures: [],
                     selectedLeague: LeagueId.PlusLiga,

@@ -24,7 +24,7 @@ interface VolleyballFixturesActions {
 type VolleyballFixturesStore = VolleyballFixturesState &
   VolleyballFixturesActions;
 
-export const useVolleyballFixtures = create<VolleyballFixturesStore>(
+export const useVolleyballFixturesStore = create<VolleyballFixturesStore>(
   (set, get) => ({
     fixtures: [],
     totalGameWeeks: 0,
@@ -40,7 +40,7 @@ export const useVolleyballFixtures = create<VolleyballFixturesStore>(
       );
       set({ fixtures, totalGameWeeks, fixturesLoading: false });
     },
-    addObservedFixture: (event) => {
+    addObservedFixture: event => {
       return set({
         observedFixtures: [...get().observedFixtures, event].sort(
           (event1, event2) => {
@@ -53,14 +53,14 @@ export const useVolleyballFixtures = create<VolleyballFixturesStore>(
         ),
       });
     },
-    changeLeague: (leagueId) =>
+    changeLeague: leagueId =>
       set({ selectedLeague: leagueId, selectedGameWeek: 0 }),
-    changeGameWeek: (round) => set({ selectedGameWeek: round }),
-    removeObservedFixture: (eventId) => {
+    changeGameWeek: round => set({ selectedGameWeek: round }),
+    removeObservedFixture: eventId => {
       const { observedFixtures } = get();
       set({
         observedFixtures: observedFixtures.filter(
-          (event) => event.id !== eventId,
+          event => event.id !== eventId,
         ),
       });
     },
@@ -68,11 +68,15 @@ export const useVolleyballFixtures = create<VolleyballFixturesStore>(
 );
 
 export const useFetchVolleyballFixtures = () => {
-  const selectedLeague = useVolleyballFixtures((state) => state.selectedLeague);
-  const selectedGameWeek = useVolleyballFixtures(
-    (state) => state.selectedGameWeek,
+  const selectedLeague = useVolleyballFixturesStore(
+    state => state.selectedLeague,
   );
-  const fetchFixtures = useVolleyballFixtures((state) => state.fetchFixtures);
+  const selectedGameWeek = useVolleyballFixturesStore(
+    state => state.selectedGameWeek,
+  );
+  const fetchFixtures = useVolleyballFixturesStore(
+    state => state.fetchFixtures,
+  );
   useEffect(() => {
     fetchFixtures();
   }, [selectedLeague, selectedGameWeek]);

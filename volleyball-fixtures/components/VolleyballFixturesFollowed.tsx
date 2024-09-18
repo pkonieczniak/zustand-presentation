@@ -1,10 +1,10 @@
 import { Flex, Paper, Text, Title } from '@mantine/core';
 import { VolleyballFixturesIcon } from './VolleyballFixturesIcon';
-import { useVolleyballFixtures } from '../stores/volleyball-fixtures.store';
+import { useVolleyballFixturesStore } from '../stores/volleyball-fixtures.store';
 
 export function VolleyballFixturesFollowed() {
-  const observedFixtures = useVolleyballFixtures(
-    (state) => state.observedFixtures,
+  const observedFixtures = useVolleyballFixturesStore(
+    state => state.observedFixtures,
   );
 
   return (

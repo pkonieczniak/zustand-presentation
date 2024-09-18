@@ -61,7 +61,7 @@ export const VolleyballFixturesProvider = ({
   }, []);
 
   const addObservedFixture = useCallback((event: FixtureData) => {
-    setObservedEvents((prev) => {
+    setObservedEvents(prev => {
       const fixtures = [...prev, event];
       return fixtures.sort((event1, event2) => {
         const format = 'DD.MM.YYYY, HH:mm';
@@ -74,7 +74,7 @@ export const VolleyballFixturesProvider = ({
   }, []);
 
   const removeObservedFixture = useCallback((eventId: FixtureData['id']) => {
-    setObservedEvents((prev) => prev.filter(({ id }) => id !== eventId));
+    setObservedEvents(prev => prev.filter(({ id }) => id !== eventId));
   }, []);
 
   return (
@@ -97,7 +97,7 @@ export const VolleyballFixturesProvider = ({
   );
 };
 
-export function useVolleyballFixtures() {
+export function useVolleyballFixturesStore() {
   const context = useContext(VolleyballFixtures);
   if (!context) {
     throw new Error(

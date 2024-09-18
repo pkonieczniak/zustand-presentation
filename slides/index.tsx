@@ -24,6 +24,7 @@ import { ContextIsNotStateManagementTool } from './ContextIsNotStateManagementTo
 import { ZustandKeyConceptsStore } from './ZustandKeyConcepts';
 import { ZustandKeyConceptsStoreSelectors } from './ZustandKeyConceptsSelectors';
 import { ZustandKeyConceptsActions } from './ZustandKeyConceptsActions';
+import { ZustandAutoSelectors } from './ZustandAutoSelectors';
 
 export function Presentation() {
   return (
@@ -63,6 +64,7 @@ export function Presentation() {
       <ZustandKeyConceptsStoreSelectors />
       <ZustandKeyConceptsActions />
       <ZustandExample />
+      <ZustandAutoSelectors />
     </Deck>
   );
 }
