@@ -16,6 +16,14 @@ import { Libraries } from './Libraries';
 import { ContextDescription } from './ContextDescription';
 import { ContextUsage } from './ContextUsage';
 import { AllConsumersRerender } from './AllConsumersRerender';
+import { Elemination } from './Elemination';
+import { ZustandVsRedux } from './ZustandVsRedux';
+import { ZustandVsRedux2 } from './ZustandVsRedux2';
+import { Finalist } from './Finalist';
+import { ContextIsNotStateManagementTool } from './ContextIsNotStateManagementTool';
+import { ZustandKeyConceptsStore } from './ZustandKeyConcepts';
+import { ZustandKeyConceptsStoreSelectors } from './ZustandKeyConceptsSelectors';
+import { ZustandKeyConceptsActions } from './ZustandKeyConceptsActions';
 
 export function Presentation() {
   return (
@@ -38,6 +46,7 @@ export function Presentation() {
       <ContextDescription />
       <ContextUsage />
       <Context />
+      <ContextIsNotStateManagementTool />
       <WhyStateLibrary />
       <ContextUnnecessaryRerenders />
       <UnsafeDefaultValues />
@@ -45,6 +54,14 @@ export function Presentation() {
       <NestedContexts />
       <Libraries />
       <StateManagementLibraries />
+      <Elemination />
+      <ZustandVsRedux />
+      <ZustandVsRedux2 />
+      <Finalist />
+      <ZustandExample />
+      <ZustandKeyConceptsStore />
+      <ZustandKeyConceptsStoreSelectors />
+      <ZustandKeyConceptsActions />
       <ZustandExample />
     </Deck>
   );

@@ -53,8 +53,8 @@ export const useVolleyballFixtures = create<VolleyballFixturesStore>(
         ),
       });
     },
-    changeLeague: (sportId) =>
-      set({ selectedLeague: sportId, selectedGameWeek: 0 }),
+    changeLeague: (leagueId) =>
+      set({ selectedLeague: leagueId, selectedGameWeek: 0 }),
     changeGameWeek: (round) => set({ selectedGameWeek: round }),
     removeObservedFixture: (eventId) => {
       const { observedFixtures } = get();

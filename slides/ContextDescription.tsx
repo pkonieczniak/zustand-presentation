@@ -6,7 +6,7 @@ export function ContextDescription() {
   return (
     <Slide className="full-width-slide overflow-auto">
       <Flex h={'100%'} direction={'column'}>
-        <Heading>Definicja Contextu</Heading>
+        <Heading>Context</Heading>
         <Appear>
           <Text>
             <strong>Context</strong> to mechanizm który umożliwia przekazywanie

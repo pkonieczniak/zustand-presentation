@@ -1,4 +1,12 @@
-import { Slide, Heading, Appear, UnorderedList, ListItem } from 'spectacle';
+import {
+  Slide,
+  Heading,
+  Appear,
+  UnorderedList,
+  ListItem,
+  Link,
+  Quote,
+} from 'spectacle';
 
 export function WhyStateLibrary() {
   return (
@@ -12,17 +20,14 @@ export function WhyStateLibrary() {
           <strong>useReducer</strong>, <strong>Context</strong> nie skalują się
           dobrze i posiadają ograniczenia
         </ListItem>
-
         <ListItem>
           Zadaniem Contextu jest rozwiązanie problemu{' '}
           <strong>Prop Drillingu</strong> i dostarczenie prostego mechanizmu DI
         </ListItem>
-
         <ListItem>
           Źle zastosowany Context może powodować nadmierne renderowanie
           aplikacji oraz błędy.
         </ListItem>
-
         <ListItem>
           Potrzebujemy bardziej zaawansowanych funkcjonalności jak trwałe
           przechowywanie danych po stronie klienta, intergracja z API

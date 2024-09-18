@@ -21,7 +21,7 @@ export function SharingStateExample() {
 
                     return (
                       <Container>
-                        <Counter count={count} setCount={setCount} />
+                        <Counter setCount={setCount} />
                         <CounterDisplay count={count} />
                         <Button disabled={!count}>Submit<Button/>
                       </Container>
