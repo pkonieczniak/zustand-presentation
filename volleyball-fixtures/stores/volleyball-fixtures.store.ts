@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { devtools, subscribeWithSelector } from 'zustand/middleware';
 import { FixtureData, LeagueId, GameWeek } from '../types';
 import dayjs from 'dayjs';
 import { getFixtures } from '../api/getFixtures';
@@ -24,47 +26,66 @@ interface VolleyballFixturesActions {
 type VolleyballFixturesStore = VolleyballFixturesState &
   VolleyballFixturesActions;
 
-export const useVolleyballFixturesStore = create<VolleyballFixturesStore>(
-  (set, get) => ({
-    fixtures: [],
-    totalGameWeeks: 0,
-    fixturesLoading: true,
-    selectedLeague: LeagueId.PlusLiga,
-    selectedGameWeek: 0,
-    observedFixtures: [],
-    fetchFixtures: async () => {
-      set({ fixturesLoading: true });
-      const { fixtures, totalGameWeeks } = await getFixtures(
-        get().selectedLeague,
-        get().selectedGameWeek,
-      );
-      set({ fixtures, totalGameWeeks, fixturesLoading: false });
-    },
-    addObservedFixture: event => {
-      return set({
-        observedFixtures: [...get().observedFixtures, event].sort(
-          (event1, event2) => {
-            const format = 'DD.MM.YYYY, HH:mm';
-            return (
-              dayjs(event1.gameDate, format).unix() -
-              dayjs(event2.gameDate, format).unix()
-            );
+export const useVolleyballFixturesStore = create(
+  subscribeWithSelector(
+    devtools<VolleyballFixturesStore>((set, get) => ({
+      fixtures: [],
+      totalGameWeeks: 0,
+      fixturesLoading: true,
+      selectedLeague: LeagueId.PlusLiga,
+      selectedGameWeek: 0,
+      observedFixtures: [],
+      fetchFixtures: async () => {
+        set({ fixturesLoading: true }, false, 'fixtures/fetchFixturesLoading');
+        const { fixtures, totalGameWeeks } = await getFixtures(
+          get().selectedLeague,
+          get().selectedGameWeek,
+        );
+        set(
+          { fixtures, totalGameWeeks, fixturesLoading: false },
+          false,
+          'fixtures/fetchFixturesDone',
+        );
+      },
+      addObservedFixture: event => {
+        return set(
+          {
+            observedFixtures: [...get().observedFixtures, event].sort(
+              (event1, event2) => {
+                const format = 'DD.MM.YYYY, HH:mm';
+                return (
+                  dayjs(event1.gameDate, format).unix() -
+                  dayjs(event2.gameDate, format).unix()
+                );
+              },
+            ),
           },
+          false,
+          'fixtures/addObservedFixture',
+        );
+      },
+      changeLeague: leagueId =>
+        set(
+          { selectedLeague: leagueId, selectedGameWeek: 0 },
+          false,
+          'fixtures/changeLeague',
         ),
-      });
-    },
-    changeLeague: leagueId =>
-      set({ selectedLeague: leagueId, selectedGameWeek: 0 }),
-    changeGameWeek: round => set({ selectedGameWeek: round }),
-    removeObservedFixture: eventId => {
-      const { observedFixtures } = get();
-      set({
-        observedFixtures: observedFixtures.filter(
-          event => event.id !== eventId,
-        ),
-      });
-    },
-  }),
+      changeGameWeek: round =>
+        set({ selectedGameWeek: round }, false, 'fixtures/changeGameWeek'),
+      removeObservedFixture: eventId => {
+        const { observedFixtures } = get();
+        set(
+          {
+            observedFixtures: observedFixtures.filter(
+              event => event.id !== eventId,
+            ),
+          },
+          false,
+          'fixtures/removeObservedEvent',
+        );
+      },
+    })),
+  ),
 );
 
 export const useFetchVolleyballFixtures = () => {
@@ -81,3 +102,18 @@ export const useFetchVolleyballFixtures = () => {
     fetchFixtures();
   }, [selectedLeague, selectedGameWeek]);
 };
+
+// Transient updates (optimize re-renders)
+// export const useFetchVolleyballFixtures = () => {
+//   useEffect(
+//     () =>
+//       useVolleyballFixturesStore.subscribe(
+//         state => [state.selectedLeague, state.selectedGameWeek],
+//         () => {
+//           useVolleyballFixturesStore.getState().fetchFixtures();
+//         },
+//         { fireImmediately: true, equalityFn: shallow },
+//       ),
+//     [],
+//   );
+// };

@@ -1,4 +1,4 @@
-import { Flex } from '@mantine/core';
+import { Flex, Grid, GridCol } from '@mantine/core';
 import {
   Heading,
   Slide,
@@ -17,35 +17,46 @@ export function ZustandAutoSelectors() {
       <Flex h={'100%'} direction={'column'}>
         <Heading>Zustand autoselectors</Heading>
         <Appear>
-          <div>
-            <CodePane language="tsx" theme={synthwave84}>
-              {`
-              export const useVolleyballFixturesStore = create<VolleyballFixturesStore>(
-                (set, get) => ({              
-                  fetchFixtures: async () => {
-                    set({ fixturesLoading: true }); // set({ ...state, fixturesLoading: true})
-                    const { fixtures, totalGameWeeks } = await getFixtures(
-                      get().selectedLeague,
-                      get().selectedGameWeek,
-                    );
-                    set({ fixtures, totalGameWeeks, fixturesLoading: false });
-                  },
-                  changeLeague: (leagueId) => set({ selectedLeague: leagueId, selectedGameWeek: 0 })              
-                })
-              )                  
-              
-              export function VolleyballFixturesSearch() {
-                const fetchFixtures = useVolleyballFixturesStore((state) => state.fetchFixtures);
-                return (
-                  //...
-                  <Button onClick={() => fetchFixtures()}/>
-                  //...
-
-                )
-              }
-              `}
-            </CodePane>
-          </div>
+          <Grid style={{ position: 'relative', top: '-50px' }}>
+            <GridCol span={5}>
+              <Flex direction={'column'} align={'center'} gap={'md'} w={'100%'}>
+                <div style={{ width: '100%' }}>
+                  <CodePane language="tsx" theme={synthwave84}>
+                    {`
+                      const selectedLeague = useVolleyballFixturesStore(
+                        state => state.selectedLeague,
+                      );
+                      const selectedGameWeek = useVolleyballFixturesStore(
+                        state => state.selectedGameWeek,
+                      );
+                      const fetchFixtures = useVolleyballFixturesStore(
+                        state => state.fetchFixtures,
+                      );
+                      useEffect(() => {
+                        fetchFixtures();
+                      }, [selectedLeague, selectedGameWeek]); 
+                  `}
+                  </CodePane>
+                </div>
+              </Flex>
+            </GridCol>
+            <GridCol span={7}>
+              <Flex direction={'column'} align={'center'} gap={'md'}>
+                <div style={{ width: '100%' }}>
+                  <CodePane language="tsx" theme={synthwave84}>
+                    {`
+                      const selectedLeague = useVolleyballFixturesStore.use.selectedLeague();
+                      const selectedGameWeek = useVolleyballFixturesStore.use.selectedGameWeek();
+                      const fetchFixtures = useVolleyballFixturesStore.use.fetchFixtures();
+                      useEffect(() => {
+                        fetchFixtures();
+                      }, [selectedLeague, selectedGameWeek]); 
+                  `}
+                  </CodePane>
+                </div>
+              </Flex>
+            </GridCol>
+          </Grid>
         </Appear>
       </Flex>
     </Slide>

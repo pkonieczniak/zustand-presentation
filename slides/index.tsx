@@ -25,6 +25,9 @@ import { ZustandKeyConceptsStore } from './ZustandKeyConcepts';
 import { ZustandKeyConceptsStoreSelectors } from './ZustandKeyConceptsSelectors';
 import { ZustandKeyConceptsActions } from './ZustandKeyConceptsActions';
 import { ZustandAutoSelectors } from './ZustandAutoSelectors';
+import { CreateSelectors } from './CreateSelectors';
+import { CreateSelectorsImpl } from './CreateSelectorsImpl';
+import { Middlewares } from './Middlewares';
 
 export function Presentation() {
   return (
@@ -65,6 +68,9 @@ export function Presentation() {
       <ZustandKeyConceptsActions />
       <ZustandExample />
       <ZustandAutoSelectors />
+      <CreateSelectors />
+      <CreateSelectorsImpl />
+      <Middlewares />
     </Deck>
   );
 }
