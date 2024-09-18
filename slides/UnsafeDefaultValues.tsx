@@ -7,22 +7,13 @@ export function UnsafeDefaultValues() {
   return (
     <Slide className="overflow-auto full-width-slide">
       <Heading>Niebezpieczne domyślne wartości</Heading>
-      <Grid>
+      <Grid style={{ position: 'relative', top: '-50px' }}>
         <GridCol span={6}>
-          <Appear>
-            <Flex direction={'column'} align={'center'} gap={'md'} w={'100%'}>
-              <IconX color="red" size={'2rem'} />
-              <div style={{ width: '100%' }}>
-                <CodePane
-                  language="tsx"
-                  theme={synthwave84}
-                  highlightRanges={[
-                    [6, 7],
-                    [14, 16],
-                    [24, 26],
-                  ]}
-                >
-                  {`
+          <Flex direction={'column'} align={'center'} gap={'md'} w={'100%'}>
+            <IconX color="red" size={'2rem'} />
+            <div style={{ width: '100%' }}>
+              <CodePane language="tsx" theme={synthwave84}>
+                {`
                     function VolleyballFixturesProvider () {
                       export const VolleyballFixturesContext = createContext<{
                         selectedLeague: LeagueId;
@@ -58,26 +49,16 @@ export function UnsafeDefaultValues() {
                       )
                     }
                   `}
-                </CodePane>
-              </div>
-            </Flex>
-          </Appear>
+              </CodePane>
+            </div>
+          </Flex>
         </GridCol>
         <GridCol span={6}>
-          <Appear>
-            <Flex direction={'column'} align={'center'} gap={'md'}>
-              <IconCheck color="green" size={'2rem'} />
-              <div style={{ width: '100%' }}>
-                <CodePane
-                  language="tsx"
-                  theme={synthwave84}
-                  highlightRanges={[
-                    [5, 5],
-                    [8, 14],
-                    [28, 31],
-                  ]}
-                >
-                  {`
+          <Flex direction={'column'} align={'center'} gap={'md'}>
+            <IconCheck color="green" size={'2rem'} />
+            <div style={{ width: '100%' }}>
+              <CodePane language="tsx" theme={synthwave84}>
+                {`
                     function VolleyballFixturesProvider () {
                       export const VolleyballFixturesContext = createContext<{
                         selectedLeague: LeagueId;
@@ -118,10 +99,9 @@ export function UnsafeDefaultValues() {
                       )
                     }
                   `}
-                </CodePane>
-              </div>
-            </Flex>
-          </Appear>
+              </CodePane>
+            </div>
+          </Flex>
         </GridCol>
       </Grid>
     </Slide>

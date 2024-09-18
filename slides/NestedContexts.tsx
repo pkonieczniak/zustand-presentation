@@ -5,9 +5,8 @@ export function NestedContexts() {
   return (
     <Slide className="overflow-auto">
       <Heading>Wielokrotne zagnieżdżone konteksty</Heading>
-      <Appear>
-        <CodePane language="tsx" theme={synthwave84}>
-          {`
+      <CodePane language="tsx" theme={synthwave84}>
+        {`
           const App = () => {
               return (
                   <AuthProvider>
@@ -22,8 +21,7 @@ export function NestedContexts() {
               );
           };      
         `}
-        </CodePane>
-      </Appear>
+      </CodePane>
     </Slide>
   );
 }

@@ -1,11 +1,21 @@
 import { Deck, DefaultTemplate } from 'spectacle';
 import { Intro } from './Intro';
 import { Agenda } from './Agenda';
-import { ContextExample } from './ContextExample';
+import { State } from './State';
+import { ZustandExample } from './ZustandExample';
 import { WhyStateLibrary } from './WhyStateLibrary';
 import { NestedContexts } from './NestedContexts';
 import { ContextUnnecessaryRerenders } from './ContextUnnecessaryRerenders';
 import { UnsafeDefaultValues } from './UnsafeDefaultValues';
+import { StateExample } from './StateExample';
+import { SharingStateExample } from './SharingStateExample';
+import { PropDrilling } from './PropDrilling';
+import { StateManagementLibraries } from './StateManagementLibraries';
+import { Context } from './Context';
+import { Libraries } from './Libraries';
+import { ContextDescription } from './ContextDescription';
+import { ContextUsage } from './ContextUsage';
+import { AllConsumersRerender } from './AllConsumersRerender';
 
 export function Presentation() {
   return (
@@ -21,11 +31,21 @@ export function Presentation() {
     >
       <Intro />
       <Agenda />
+      <State />
+      <StateExample />
+      <SharingStateExample />
+      <PropDrilling />
+      <ContextDescription />
+      <ContextUsage />
+      <Context />
       <WhyStateLibrary />
-      <ContextExample />
       <ContextUnnecessaryRerenders />
       <UnsafeDefaultValues />
+      <AllConsumersRerender />
       <NestedContexts />
+      <Libraries />
+      <StateManagementLibraries />
+      <ZustandExample />
     </Deck>
   );
 }
