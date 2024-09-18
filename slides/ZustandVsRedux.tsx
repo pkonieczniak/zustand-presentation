@@ -13,9 +13,9 @@ export function ZustandVsRedux() {
     <Slide className="full-width-slide">
       <Heading>
         <Flex align={'center'} justify={'center'} gap={'md'}>
-          <Image src="/public/images/zustand.png" w={'100px'} />
+          <Image src="/zustand-presentation/images/zustand.png" w={'100px'} />
           Zustand vs Redux
-          <Image src="/public/images/redux.svg" w={'100px'} />
+          <Image src="/zustand-presentation/images/redux.svg" w={'100px'} />
         </Flex>
       </Heading>
       <Appear>

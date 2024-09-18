@@ -13,7 +13,7 @@ export function Context() {
       >
         <Image
           objectFit="contain"
-          src="/public/images/context.png"
+          src="/zustand-presentation/images/context.png"
           imgProps={{ width: '100%' }}
           alt="State sharing overview"
         />

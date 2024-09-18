@@ -13,7 +13,7 @@ export function PropDrilling() {
       >
         <Image
           objectFit="contain"
-          src="/public/images/prop-drilling.png"
+          src="/zustand-presentation/images/prop-drilling.png"
           imgProps={{ width: '100%' }}
           alt="State sharing overview"
         />
