@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { shallow } from 'zustand/shallow';
-import { devtools, subscribeWithSelector } from 'zustand/middleware';
+import { devtools, subscribeWithSelector, persist } from 'zustand/middleware';
 import { FixtureData, LeagueId, GameWeek } from '../types';
 import dayjs from 'dayjs';
 import { getFixtures } from '../api/getFixtures';
@@ -28,63 +28,77 @@ type VolleyballFixturesStore = VolleyballFixturesState &
 
 export const useVolleyballFixturesStore = create(
   subscribeWithSelector(
-    devtools<VolleyballFixturesStore>((set, get) => ({
-      fixtures: [],
-      totalGameWeeks: 0,
-      fixturesLoading: true,
-      selectedLeague: LeagueId.PlusLiga,
-      selectedGameWeek: 0,
-      observedFixtures: [],
-      fetchFixtures: async () => {
-        set({ fixturesLoading: true }, false, 'fixtures/fetchFixturesLoading');
-        const { fixtures, totalGameWeeks } = await getFixtures(
-          get().selectedLeague,
-          get().selectedGameWeek,
-        );
-        set(
-          { fixtures, totalGameWeeks, fixturesLoading: false },
-          false,
-          'fixtures/fetchFixturesDone',
-        );
+    persist(
+      devtools<VolleyballFixturesStore>((set, get) => ({
+        fixtures: [],
+        totalGameWeeks: 0,
+        fixturesLoading: true,
+        selectedLeague: LeagueId.PlusLiga,
+        selectedGameWeek: 0,
+        observedFixtures: [],
+        fetchFixtures: async () => {
+          set(
+            { fixturesLoading: true },
+            false,
+            'fixtures/fetchFixturesLoading',
+          );
+          const { fixtures, totalGameWeeks } = await getFixtures(
+            get().selectedLeague,
+            get().selectedGameWeek,
+          );
+          set(
+            { fixtures, totalGameWeeks, fixturesLoading: false },
+            false,
+            'fixtures/fetchFixturesDone',
+          );
+        },
+        addObservedFixture: event => {
+          return set(
+            {
+              observedFixtures: [...get().observedFixtures, event].sort(
+                (event1, event2) => {
+                  const format = 'DD.MM.YYYY, HH:mm';
+                  return (
+                    dayjs(event1.gameDate, format).unix() -
+                    dayjs(event2.gameDate, format).unix()
+                  );
+                },
+              ),
+            },
+            false,
+            'fixtures/addObservedFixture',
+          );
+        },
+        changeLeague: leagueId =>
+          set(
+            { selectedLeague: leagueId, selectedGameWeek: 0 },
+            false,
+            'fixtures/changeLeague',
+          ),
+        changeGameWeek: round =>
+          set({ selectedGameWeek: round }, false, 'fixtures/changeGameWeek'),
+        removeObservedFixture: eventId => {
+          const { observedFixtures } = get();
+          set(
+            {
+              observedFixtures: observedFixtures.filter(
+                event => event.id !== eventId,
+              ),
+            },
+            false,
+            'fixtures/removeObservedEvent',
+          );
+        },
+      })),
+      {
+        name: 'volleyball-store',
+        partialize: state => {
+          return {
+            observedFixtures: state.observedFixtures,
+          };
+        },
       },
-      addObservedFixture: event => {
-        return set(
-          {
-            observedFixtures: [...get().observedFixtures, event].sort(
-              (event1, event2) => {
-                const format = 'DD.MM.YYYY, HH:mm';
-                return (
-                  dayjs(event1.gameDate, format).unix() -
-                  dayjs(event2.gameDate, format).unix()
-                );
-              },
-            ),
-          },
-          false,
-          'fixtures/addObservedFixture',
-        );
-      },
-      changeLeague: leagueId =>
-        set(
-          { selectedLeague: leagueId, selectedGameWeek: 0 },
-          false,
-          'fixtures/changeLeague',
-        ),
-      changeGameWeek: round =>
-        set({ selectedGameWeek: round }, false, 'fixtures/changeGameWeek'),
-      removeObservedFixture: eventId => {
-        const { observedFixtures } = get();
-        set(
-          {
-            observedFixtures: observedFixtures.filter(
-              event => event.id !== eventId,
-            ),
-          },
-          false,
-          'fixtures/removeObservedEvent',
-        );
-      },
-    })),
+    ),
   ),
 );
 

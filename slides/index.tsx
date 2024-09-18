@@ -28,6 +28,9 @@ import { ZustandAutoSelectors } from './ZustandAutoSelectors';
 import { CreateSelectors } from './CreateSelectors';
 import { CreateSelectorsImpl } from './CreateSelectorsImpl';
 import { Middlewares } from './Middlewares';
+import { PersistingData } from './PersistingData';
+import { ReadWriteOutsideStore } from './ReadWriteOutsideStore';
+import { ZustandWithNext } from './ZustandWithNext';
 
 export function Presentation() {
   return (
@@ -66,11 +69,13 @@ export function Presentation() {
       <ZustandKeyConceptsStore />
       <ZustandKeyConceptsStoreSelectors />
       <ZustandKeyConceptsActions />
-      <ZustandExample />
       <ZustandAutoSelectors />
       <CreateSelectors />
       <CreateSelectorsImpl />
       <Middlewares />
+      <PersistingData />
+      <ReadWriteOutsideStore />
+      <ZustandWithNext />
     </Deck>
   );
 }

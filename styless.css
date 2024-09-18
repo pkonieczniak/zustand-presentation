@@ -50,6 +50,7 @@ pre {
 
 .full-width-slide > div {
   width: 100%;
+  overflow-y: auto;
 }
 
 .deck > div {

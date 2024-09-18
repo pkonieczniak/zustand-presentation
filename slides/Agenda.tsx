@@ -9,7 +9,6 @@ export function Agenda() {
         'Context - Dlaczego potrzebujemy kolejnej biblioteki?',
         'Obecne rozwiązania na rynku',
         'Zustand',
-        'Podsumowanie',
       ]}
     ></SlideLayout.List>
   );
