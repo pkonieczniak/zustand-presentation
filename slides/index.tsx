@@ -31,6 +31,7 @@ import { Middlewares } from './Middlewares';
 import { PersistingData } from './PersistingData';
 import { ReadWriteOutsideStore } from './ReadWriteOutsideStore';
 import { ZustandWithNext } from './ZustandWithNext';
+import { EndSlide } from './EndSlide';
 
 export function Presentation() {
   return (
@@ -76,6 +77,7 @@ export function Presentation() {
       <PersistingData />
       <ReadWriteOutsideStore />
       <ZustandWithNext />
+      <EndSlide />
     </Deck>
   );
 }
